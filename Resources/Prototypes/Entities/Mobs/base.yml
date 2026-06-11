@@ -1,4 +1,4 @@
-# The literal bare minimum needed to be a controllable mob. Cannot move but can interact.
+﻿# The literal bare minimum needed to be a controllable mob. Cannot move but can interact.
 - type: entity
   abstract: true
   save: false
@@ -36,7 +36,6 @@
   - type: ContentEye
   - type: CameraRecoil
   - type: MindContainer
-<<<<<<< HEAD
   - type: TTS # Corvax-TTS
   - type: RequireProjectileTarget
     active: False
@@ -60,11 +59,6 @@
         - Candle
   - type: AnimatedEmotes
   # ADT-tweak-end
- 
-=======
-  - type: RequireProjectileTarget
-    active: False
->>>>>>> upstreamwiz/master
 
 # The progenitor. This should only container the most basic components possible.
 # Only put things on here if every mob *must* have it. This includes ghosts.
@@ -96,6 +90,7 @@
   abstract: true
   components:
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: Destructible
     thresholds:
@@ -298,3 +293,7 @@
     bloodlossHealDamage:
       types:
         Bloodloss: -1
+    # ADT-Tweak start
+    bloodRefreshAmount: 0.3
+    bleedReductionAmount: 0.3
+    # ADT-Tweak end

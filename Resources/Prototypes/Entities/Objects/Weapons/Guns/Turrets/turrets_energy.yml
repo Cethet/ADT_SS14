@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   abstract: true
   parent: [BaseWeaponEnergyTurret, ConstructibleMachine]
   id: WeaponEnergyTurretStationBase
@@ -6,11 +6,7 @@
   description: A high-tech autonomous weapons system designed to keep unauthorized personnel out of sensitive areas.
   components:
   - type: Anchorable
-<<<<<<< HEAD
-    flags: 
-=======
     flags:
->>>>>>> upstreamwiz/master
     - Anchorable
   - type: Rotatable
   - type: Fixtures
@@ -95,6 +91,7 @@
     deployedDamageModifierSetId: FlimsyMetallic
   - type: Damageable
     damageModifierSet: Metallic
+  - type: Injurable
   - type: Repairable
     doAfterDelay: 10
     allowSelfRepair: false

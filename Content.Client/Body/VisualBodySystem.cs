@@ -147,7 +147,8 @@ public sealed class VisualBodySystem : SharedVisualBodySystem
         if (!censorNudity)
             yield break;
 
-        var group = _prototype.Index(ent.Comp.MarkingData.Group);
+        if (!_prototype.TryIndex(ent.Comp.MarkingData.Group, out var group))
+            yield break;
         foreach (var layer in ent.Comp.MarkingData.Layers)
         {
             if (!group.Limits.TryGetValue(layer, out var layerLimits))
@@ -190,9 +191,16 @@ public sealed class VisualBodySystem : SharedVisualBodySystem
 
                 if (!_sprite.LayerMapTryGet(target, layerId, out _, false))
                 {
-                    var layer = _sprite.AddLayer(target, sprite, index + i + 1);
+                    // ADT-Tweak-Start: wizden nubody refactor dropped applying MarkingPrototype.Shader
+                    var layerData = new PrototypeLayerData
+                    {
+                        RsiPath = rsi.RsiPath.ToString(),
+                        State = rsi.RsiState,
+                        Shader = proto.Shader,
+                    };
+                    var layer = _sprite.AddLayer(target, layerData, index + i + 1);
                     _sprite.LayerMapSet(target, layerId, layer);
-                    _sprite.LayerSetSprite(target, layerId, rsi);
+                    // ADT-Tweak-End
                 }
 
                 if (marking.MarkingColors is not null && i < marking.MarkingColors.Count)

@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   abstract: true
   parent: BaseItem
   id: SheetGlassBase
@@ -16,15 +16,13 @@
     tags:
     - Sheet
     - ConstructionMaterial
-<<<<<<< HEAD
     - NoPaint #ADT tweak
     - ADTGlassSheet #ADT tweak
-=======
->>>>>>> upstreamwiz/master
   - type: Material
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Glass
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Appearance
   - type: Destructible
     thresholds:

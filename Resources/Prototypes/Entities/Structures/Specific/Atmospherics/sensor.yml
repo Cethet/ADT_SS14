@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   id: AirSensorBase
   abstract: true
   components:
@@ -25,7 +25,6 @@
       Ammonia: stationAmmonia
       NitrousOxide: stationNO
       Frezon: danger
-<<<<<<< HEAD
       # ADT-Gas-Start
       BZ: danger
       Pluoxium: unwanted
@@ -39,8 +38,6 @@
       Helium: unwanted
       AntiNoblium: danger
       # ADT-Gas-End
-=======
->>>>>>> upstreamwiz/master
   - type: GuideHelp
     guides:
     - DeviceMonitoringAndControl
@@ -63,8 +60,9 @@
   - type: Transform
     anchored: true
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:

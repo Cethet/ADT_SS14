@@ -1,3 +1,4 @@
+using Content.Shared.ADT.Traits.Assorted;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
@@ -76,11 +77,12 @@ public sealed class DamageOverlayUiController : UIController
     }
 
     //TODO: Jezi: adjust oxygen and hp overlays to use appropriate systems once bodysim is implemented
-    private void UpdateOverlays(EntityUid entity, MobStateComponent? mobState, DamageableComponent? damageable = null, MobThresholdsComponent? thresholds = null)
+    private void UpdateOverlays(EntityUid entity, MobStateComponent? mobState, DamageableComponent? damageable = null, MobThresholdsComponent? thresholds = null, InjurableComponent? injurable = null)
     {
         if (mobState == null && !EntityManager.TryGetComponent(entity, out mobState) ||
             thresholds == null && !EntityManager.TryGetComponent(entity, out thresholds) ||
-            damageable == null && !EntityManager.TryGetComponent(entity, out  damageable))
+            damageable == null && !EntityManager.TryGetComponent(entity, out  damageable) ||
+            injurable == null && !EntityManager.TryGetComponent(entity, out injurable))
             return;
 
         if (!_mobThresholdSystem.TryGetIncapThreshold(entity, out var foundThreshold, thresholds))
@@ -105,7 +107,7 @@ public sealed class DamageOverlayUiController : UIController
 
                 if (!_statusEffects.TryEffectsWithComp<PainNumbnessStatusEffectComponent>(entity, out _))
                 {
-                    foreach (var painDamageType in damageable.PainDamageGroups)
+                    foreach (var painDamageType in injurable.PainDamageGroups)
                     {
 
                         damagePerGroup.TryGetValue(painDamageType, out var painDamage);
@@ -135,16 +137,20 @@ public sealed class DamageOverlayUiController : UIController
                     return;
                 _overlay.CritLevel = critLevel.Value.Float();
 
+                _overlay.PainLevel = 0;
+
                 // ADT-Tweak start
                 FixedPoint2 painLevel = 0;
-                foreach (var painDamageType in damageable.PainDamageGroups)
+                if (!_statusEffects.TryEffectsWithComp<PainNumbnessStatusEffectComponent>(entity, out _))
                 {
-                    damageable.DamagePerGroup.TryGetValue(painDamageType, out var painDamage);
-                    painLevel += painDamage;
+                    foreach (var painDamageType in injurable.PainDamageGroups)
+                    {
+                        damagePerGroup.TryGetValue(painDamageType, out var painDamage);
+                        painLevel += painDamage;
+                    }
+                    _overlay.PainLevel = FixedPoint2.Min(1f, painLevel / critThreshold).Float();
                 }
-                _overlay.PainLevel = FixedPoint2.Min(1f, painLevel / critThreshold).Float();
                 // ADT-Tweak end
-
                 _overlay.DeadLevel = 0;
                 break;
             }

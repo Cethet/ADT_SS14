@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   id: ClosetBase
   parent: [ BaseStructureDynamic, BasePaperLabelableVisualized ]
   name: closet
@@ -25,20 +25,6 @@
       sprite: Structures/Storage/closet_labels.rsi
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: MovedByPressure
-<<<<<<< HEAD
-  - type: PaperLabel
-    labelSlot:
-      insertVerbText: paper-label-attach # ADT translate
-      ejectVerbText: paper-label-remove # ADT translate
-      whitelist:
-        components:
-        - Paper
-      blacklist:
-        tags:
-        - Book
-  - type: ItemSlots
-=======
->>>>>>> upstreamwiz/master
   - type: DamageOnHighSpeedImpact
     damage:
       types:
@@ -75,8 +61,9 @@
     placeCentered: true
     isPlaceable: false
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -294,8 +281,9 @@
     placeCentered: true
     isPlaceable: false
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:

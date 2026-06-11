@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   name: bat
   parent: [ SimpleMobBase, FlyingMobBase, MobCombat ]
   id: MobBat
@@ -50,22 +50,16 @@
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
   - type: Bloodstream
-<<<<<<< HEAD
-    bloodMaxVolume: 50
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 50
 # ADT-Tweak-start
   # - type: ReplacementAccent
   #   accent: mouse
   - type: MobCollision
     enabled: false
 # ADT-Tweak-end
-=======
-    bloodReferenceSolution:
-      reagents:
-      - ReagentId: Blood
-        Quantity: 50
-  - type: ReplacementAccent
-    accent: mouse
->>>>>>> upstreamwiz/master
   - type: MeleeWeapon
     soundHit:
         path: /Audio/Effects/bite.ogg
@@ -423,15 +417,10 @@
       Dead:
         Base: cockroach_dead
   - type: Bloodstream
-<<<<<<< HEAD
-    bloodReagent: InsectBlood
-    bloodMaxVolume: 20
-=======
     bloodReferenceSolution:
       reagents:
       - ReagentId: InsectBlood
         Quantity: 20
->>>>>>> upstreamwiz/master
   - type: Edible
   - type: FlavorProfile
     flavors:
@@ -452,8 +441,9 @@
     spawned:
     - id: FoodMeatSlime
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Cockroach
+  - type: Injurable
+    damageContainer: Biological
   - type: Tag
     tags:
     - Trash
@@ -550,15 +540,11 @@
   - type: Speech
     speechVerb: Moth
     speechSounds: Squeak
-<<<<<<< HEAD
-    allowedEmotes: ['Chitter', 'Squeak']
-    # ADT-Tweak Moth Roll start
+    allowedEmotes: ['Chitter', 'Squeak', 'Flap']
+  # ADT-Tweak Moth Roll start
   - type: DashAction
     actionProto: ADTActionDashMoth
     # ADT-Tweak Moth Roll end
-=======
-    allowedEmotes: ['Chitter', 'Squeak', 'Flap']
->>>>>>> upstreamwiz/master
   - type: FaxableObject
     insertingState: inserting_mothroach
   - type: MothAccent
@@ -603,8 +589,9 @@
     weightlessFriction: 1
     baseWeightlessModifier: 1
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Moth
+  - type: Injurable
+    damageContainer: Biological
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -1132,7 +1119,7 @@
           Quantity: 30
       wool:
         maxVol: 250
-    # ADT Start
+  # ADT Start
   - type: SolutionRegeneration
     solution: udder
     generated:
@@ -1514,7 +1501,10 @@
       - Passive
   - type: HTN
     rootTask:
-      task: SimpleHostileCompound
+      task: MonkeyCompound
+    blackboard:
+      NavInteract: !type:Bool
+        true
   - type: IdExaminable
   - type: Tag
     tags:
@@ -1530,18 +1520,14 @@
       methods: [ Touch ]
       effects:
       - !type:WashCreamPie
-<<<<<<< HEAD
   # ADT-Tweak start
   - type: VentCrawler
     allowInventory: false
   # ADT-Tweak end
-
-=======
   - type: Crawler
   - type: StatusIcon
     bounds: -0.5,-0.5,0.5,0.5
   - type: JobStatus # marks them as crew
->>>>>>> upstreamwiz/master
 
 - type: entity
   name: monkey
@@ -1798,18 +1784,11 @@
 
 - type: entity
   name: mouse
-  parent:
-  - SimpleMobBase
-  - BaseMobAnimal
+  parent: [ SimpleMobBase, BaseMobAnimal ]
   id: MobMouse
   description: Squeak!
   components:
-<<<<<<< HEAD
   - type: VentCrawler # ADT tweak
-  - type: Body
-    prototype: Mouse
-=======
->>>>>>> upstreamwiz/master
   - type: GhostRole
     makeSentient: true
     allowSpeech: true
@@ -2014,6 +1993,7 @@
         Asphyxiation: 4
         Slash: 7
         Blunt: 3
+  - type: Injurable
 
 - type: entity
   parent: MobMouse
@@ -2131,8 +2111,9 @@
     - id: SheetUranium1
       amount: 1
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Zombie
+  - type: Injurable
+    damageContainer: Biological
 
 - type: entity
   name: lizard #Weh
@@ -2186,8 +2167,9 @@
       - ReagentId: Blood
         Quantity: 150
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Scale
+  - type: Injurable
+    damageContainer: Biological
   - type: Tag
     tags:
     - VimPilot
@@ -2239,15 +2221,11 @@
     interactFailureString: petting-failure-generic
     interactSuccessSpawn: EffectHearts
   - type: Bloodstream
-<<<<<<< HEAD
-    bloodMaxVolume: 50
-  - type: SupermatterIgnore # ADT-Tweak
-=======
     bloodReferenceSolution:
       reagents:
       - ReagentId: Blood
         Quantity: 50
->>>>>>> upstreamwiz/master
+  - type: SupermatterIgnore # ADT-Tweak
 
 - type: entity
   name: frog
@@ -2596,11 +2574,10 @@
       - ReagentId: Blood
         Quantity: 50
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Scale
+  - type: Injurable
+    damageContainer: Biological
 
-# Code unique spider prototypes or combine them all into one spider and get a
-# random sprite state when you spawn it.
 - type: entity
   parent: [ SimpleMobBase, BaseMobHemocyanin, MobCombat ]
   id: MobSpiderBase
@@ -3076,14 +3053,11 @@
   - type: MobPrice
     price: 200
   - type: MessyDrinker
-<<<<<<< HEAD
-=======
   # TODO: Fix the sprite offset
   #- type: CreamPied
   #  sprite:
   #    sprite: Effects/creampie.rsi
   #    state: creampie_corgi
->>>>>>> upstreamwiz/master
 
 - type: entity
   parent: MobCorgiBase
@@ -3101,25 +3075,9 @@
     spawned:
     - id: FoodMeat
       amount: 2
-<<<<<<< HEAD
   # ADT Commented
   # - type: ReplacementAccent
   #   accent: dog
-  - type: InteractionPopup
-    interactSuccessString: petting-success-dog
-    interactFailureString: petting-failure-generic
-    interactSuccessSpawn: EffectHearts
-    interactSuccessSound:
-      path: /Audio/Animals/small_dog_bark_happy.ogg
-  - type: Grammar
-    attributes:
-      gender: epicene
-  - type: SentienceTarget
-    flavorKind: station-event-random-sentience-flavor-corgi
-=======
-  - type: ReplacementAccent
-    accent: dog
->>>>>>> upstreamwiz/master
   - type: Tag
     tags:
     - VimPilot
@@ -3179,8 +3137,9 @@
       - ReagentId: DemonsBlood
         Quantity: 150
   - type: Damageable
-    damageContainer: BiologicalMetaphysical
     damageModifierSet: Infernal
+  - type: Injurable
+    damageContainer: BiologicalMetaphysical
   - type: Temperature
     currentTemperature: 310.15
     specificHeat: 42

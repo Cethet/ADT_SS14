@@ -106,7 +106,7 @@ public sealed partial class RevenantSystem
         }
 
         if (!HasComp<MobStateComponent>(target)
-            || !HasComp<HumanoidAppearanceComponent>(target)
+            || !HasComp<HumanoidProfileComponent>(target)
             || HasComp<RevenantComponent>(target)
             || HasComp<MagicImmunityComponent>(target)) // ADT-Tweak
             return;
@@ -416,7 +416,7 @@ public sealed partial class RevenantSystem
                 continue;
             // ADT-Tweak end
 
-            _status.TryAddStatusEffect<TemporaryBlindnessComponent>(ent, TemporaryBlindnessSystem.BlindingStatusEffect, TimeSpan.FromSeconds(3), true);
+            _status.TryAddStatusEffect<BlindnessStatusEffectComponent>(ent, BlindnessSystem.BlindingStatusEffect, TimeSpan.FromSeconds(3), true);
             _hallucinations.StartHallucinations(ent, "ADTHallucinations", component.HysteriaDuration, true, component.HysteriaProto);
             if (!_mind.TryGetMind(ent, out var mindId, out var mind) || !_player.TryGetSessionById(mind.UserId, out var session))
                 continue;

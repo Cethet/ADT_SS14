@@ -1,4 +1,4 @@
-# Lots of misc stuff in here, hard to parent it.
+﻿# Lots of misc stuff in here, hard to parent it.
 # ^ Yeah, this stuff should probably get split into different files but not my fight today.
 
 # Powder (For when you throw stuff like flour and it explodes)
@@ -30,6 +30,7 @@
     solution: food
     utensil: Spoon
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Spillable
     solution: food
@@ -994,10 +995,7 @@
     shape:
     - 0,0,1,0
     - 0,1,0,1
-<<<<<<< HEAD
     size: Tiny # ADT-Tweak
-=======
->>>>>>> upstreamwiz/master
     storedOffset: -2,-4
   - type: FlavorProfile
     flavors:
@@ -1019,10 +1017,6 @@
   description: Buttery, flaky, fibery goodness waiting to happen.
   components:
   - type: Item
-<<<<<<< HEAD
-    size: Tiny
-=======
->>>>>>> upstreamwiz/master
     shape:
     - 0,0,1,0
     - 0,1,0,1

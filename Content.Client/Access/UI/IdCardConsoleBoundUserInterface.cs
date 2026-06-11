@@ -4,7 +4,6 @@ using Content.Shared.Access.Systems;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.CrewManifest;
 using Content.Shared.Roles;
-using Content.Shared.Roles;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using static Content.Shared.Access.Components.IdCardConsoleComponent;
@@ -69,12 +68,6 @@ namespace Content.Client.Access.UI
 
         public void SubmitData(string newFullName, string newJobTitle, List<ProtoId<AccessLevelPrototype>> newAccessList, ProtoId<JobPrototype> newJobPrototype)
         {
-            if (newFullName.Length > _maxNameLength)
-                newFullName = newFullName[.._maxNameLength];
-
-            if (newJobTitle.Length > _maxIdJobLength)
-                newJobTitle = newJobTitle[.._maxIdJobLength];
-
             SendMessage(new WriteToTargetIdMessage(
                 newFullName,
                 newJobTitle,

@@ -1107,6 +1107,9 @@
   - type: FoodSequenceElement
     entries:
       CottonBurger: PenguinPlushie
+  - type: Tag # ADT-Tweak
+    tags:
+    - ADTPenguinToy
 
 - type: entity
   parent: BasePlushie
@@ -1228,8 +1231,6 @@
   - type: FoodSequenceElement
     entries:
       CottonBurger: PlushieVulp
-<<<<<<< HEAD:Resources/Prototypes/Entities/Objects/Fun/plushies.yml
-=======
 
 - type: entity
   parent: BasePlushie
@@ -1304,4 +1305,3 @@
 #  - type: FoodSequenceElement - does not work with randomized sprites
 #    entries:
 #      CottonBurger: AmongPequeno
->>>>>>> upstreamwiz/master:Resources/Prototypes/Entities/Objects/Fun/Plushies/plushies.yml

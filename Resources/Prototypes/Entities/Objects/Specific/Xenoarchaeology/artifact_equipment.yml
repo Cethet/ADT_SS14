@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   parent: [ BaseStructureDynamic, BasePaperLabelableVisualized ]
   id: CrateArtifactContainer
   name: artifact container
@@ -53,8 +53,9 @@
     - type: PlaceableSurface
       isPlaceable: false
     - type: Damageable
-      damageContainer: StructuralInorganic
       damageModifierSet: StructuralMetallicStrong
+    - type: Injurable
+      damageContainer: StructuralInorganic
     - type: Destructible
       thresholds:
         - trigger:
@@ -63,7 +64,6 @@
           behaviors:
             - !type:DoActsBehavior
               acts: ["Destruction"]
-<<<<<<< HEAD
     - type: PaperLabel
       labelSlot:
         insertVerbText: paper-label-attach # ADT translate
@@ -74,8 +74,6 @@
         blacklist:
           tags:
           - Book
-=======
->>>>>>> upstreamwiz/master
     - type: Appearance
     - type: EntityStorageVisuals
       stateDoorOpen: open
@@ -149,8 +147,9 @@
       path: /Audio/Items/toolbox_drop.ogg
   - type: LockVisuals
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
       - trigger:

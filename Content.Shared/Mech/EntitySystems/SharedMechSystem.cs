@@ -14,6 +14,7 @@ using Content.Shared.Mech.Equipment.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.StepTrigger.Components;
 using Content.Shared.Storage.Components;
 using Content.Shared.Weapons.Melee;
 using Robust.Shared.Containers;
@@ -31,7 +32,6 @@ namespace Content.Shared.Mech.EntitySystems;
 /// </summary>
 public abstract partial class SharedMechSystem : EntitySystem   // ADT - partial
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
@@ -151,6 +151,8 @@ public abstract partial class SharedMechSystem : EntitySystem   // ADT - partial
         rider.Mech = mech;
         Dirty(pilot, rider);
 
+        EnsureComp<ProtectedFromStepTriggersComponent>(pilot); // ADT-Tweak
+
         if (_net.IsClient)
             return;
 
@@ -172,6 +174,7 @@ public abstract partial class SharedMechSystem : EntitySystem   // ADT - partial
             return;
         RemComp<RelayInputMoverComponent>(pilot);
         RemComp<InteractionRelayComponent>(pilot);
+        RemCompDeferred<ProtectedFromStepTriggersComponent>(pilot); // ADT-Tweak
 
         _actions.RemoveProvidedActions(pilot, mech);
     }

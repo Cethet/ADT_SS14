@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server.ADT;
 using Content.Server.Administration.Logs;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.Prototypes;
@@ -220,7 +221,6 @@ namespace Content.Server.Database
             var appearance = humanoid.Appearance;
             var dataNode = _serialization.WriteValue(appearance.Markings, alwaysWrite: true, notNullableOverride: true);
 
-            // profile.Languages = humanoid.Languages.ToList(); TODO: UPSTREAM260426: доделать БД языков и сохранение БАРКОВ
             profile.CharacterName = humanoid.Name;
             profile.FlavorText = humanoid.FlavorText;
             profile.Species = humanoid.Species;
@@ -231,6 +231,24 @@ namespace Content.Server.Database
             profile.SkinColor = appearance.SkinColor.ToHex();
             profile.SpawnPriority = (int) humanoid.SpawnPriority;
             profile.OrganMarkings = JsonSerializer.SerializeToDocument(dataNode.ToJsonNode());
+            // ADT-Tweak-Start
+            profile.Voice = humanoid.Voice;
+            profile.BarkProto = humanoid.Bark.Proto;
+            profile.BarkPitch = humanoid.Bark.Pitch;
+            profile.LowBarkVar = humanoid.Bark.MinVar;
+            profile.HighBarkVar = humanoid.Bark.MaxVar;
+            profile.HeadshotUrl = humanoid.HeadshotUrl;
+            profile.OOCNotes = humanoid.OOCNotes;
+            profile.Languages.Clear();
+            foreach (var langId in humanoid.Languages)
+            {
+                profile.Languages.Add(new Language
+                {
+                    LanguageName = langId,
+                    Profile = profile
+                });
+            }
+            // ADT-Tweak-End
 
             // support for downgrades - at some point this should be removed
             var legacyMarkings = appearance.Markings
@@ -246,7 +264,7 @@ namespace Content.Server.Database
                 JsonSerializer.SerializeToDocument(legacyMarkings.Select(marking => marking.ToString()).ToList());
             profile.HairName = hairMarking?.MarkingId ?? HairStyles.DefaultHairStyle;
             profile.FacialHairName = facialHairMarking?.MarkingId ?? HairStyles.DefaultFacialHairStyle;
-            profile.HairColor = (hairMarking?.MarkingColors[0] ?? Color.Black).ToHex();
+            profile.HairColor = HairColorSerializer.Serialize(appearance.HairColor.Count > 0 ? appearance.HairColor : new List<Color> { Color.Black }); // ADT-tweak: gradient support
             profile.FacialHairColor = (facialHairMarking?.MarkingColors[0] ?? Color.Black).ToHex();
 
             profile.Slot = slot;

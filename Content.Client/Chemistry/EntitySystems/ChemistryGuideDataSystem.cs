@@ -109,7 +109,7 @@ public sealed class ChemistryGuideDataSystem : SharedChemistryGuideDataSystem
             if (!entProto.TryGetComponent<ExtractableComponent>(out var extractableComponent, EntityManager.ComponentFactory))
                 continue;
 
-            if (entProto.HasComponent<BodyPartComponent>() || entProto.HasComponent<PillComponent>()) // ADT-Tweak
+            if (entProto.HasComponent<OrganComponent>() || entProto.HasComponent<PillComponent>()) // ADT-Tweak
                 continue;
 
             if (extractableComponent.JuiceSolution is { } juiceSolution)
@@ -251,4 +251,3 @@ public sealed class ReagentGasSourceData : ReagentSourceData
         GasPrototype = gasPrototype;
     }
 }
-

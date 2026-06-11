@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   name: basic slime
   id: BaseMobAdultSlimes
   parent: [ BaseMobSlimes, SimpleMobBase, MobCombat ]
@@ -51,8 +51,9 @@
         Asphyxiation: -1.0
     maxSaturation: 15
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Slime
+  - type: Injurable
+    damageContainer: Biological
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -186,14 +187,9 @@
       rules: ghost-role-information-angry-slimes-rules
       mindRoles:
       - MindRoleGhostRoleTeamAntagonist
-<<<<<<< HEAD
 #      raffle:
 #        settings: short ADT tweak для быстрого захода на рольку
-=======
-      raffle:
-        settings: short
     - type: ForceAttack
->>>>>>> upstreamwiz/master
 
 - type: entity
   name: green slime
@@ -232,14 +228,9 @@
       rules: ghost-role-information-angry-slimes-rules
       mindRoles:
       - MindRoleGhostRoleTeamAntagonist
-<<<<<<< HEAD
 #      raffle:
 #        settings: short ADT tweak для быстрого захода на рольку
-=======
-      raffle:
-        settings: short
     - type: ForceAttack
->>>>>>> upstreamwiz/master
 
 - type: entity
   name: yellow slime
@@ -277,11 +268,6 @@
       rules: ghost-role-information-angry-slimes-rules
       mindRoles:
       - MindRoleGhostRoleTeamAntagonist
-<<<<<<< HEAD
 #      raffle:
 #        settings: short ADT tweak для быстрого захода на рольку
-=======
-      raffle:
-        settings: short
     - type: ForceAttack
->>>>>>> upstreamwiz/master

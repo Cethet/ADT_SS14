@@ -18,16 +18,10 @@
     baseSprintSpeed : 4
   - type: StatusEffects
     allowed:
-<<<<<<< HEAD
-    - Stutter
     - Weakness #ADT-Weakness-Tweak
-=======
->>>>>>> upstreamwiz/master
     - Electrocution
-    - TemporaryBlindness
     - Pacified
-    - Flashed
-    - RadiationProtection
+    - Flashed  - 
     - Adrenaline
   - type: Buckle
   # - type: StandingState ADT-tweak: а оно нам нудно?
@@ -35,11 +29,8 @@
     tags:
     - DoorBumpOpener
     - StunImmune
-<<<<<<< HEAD
   - type: ProjectileIgnoreCrawling
-=======
   - type: Blindable
->>>>>>> upstreamwiz/master
 
 - type: entity
   abstract: true
@@ -101,16 +92,10 @@
     baseDecayRate: 0.04
   - type: StatusEffects
     allowed:
-<<<<<<< HEAD
-    - Stutter
     - Weakness #ADT-Weakness-Tweak
-=======
->>>>>>> upstreamwiz/master
     - Electrocution
-    - TemporaryBlindness
     - Pacified
     - Flashed
-    - RadiationProtection
     - Adrenaline
   - type: Bloodstream
     bloodReferenceSolution:

@@ -27,7 +27,7 @@ public sealed partial class ControlledSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physicsSystem = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    private static readonly ProtoId<DamageGroupPrototype> BruteDamageGroup = "Brute";
 
     public override void Initialize()
     {
@@ -153,7 +153,7 @@ public sealed partial class ControlledSystem : EntitySystem
                 _mind.TransferTo(mindId, uid);
             QueueDel(component.Observer);
             RemComp<ControlledComponent>(uid);
-            var damage_brute = new DamageSpecifier(_proto.Index<DamageGroupPrototype>("Brute"), 1f);
+            var damage_brute = new DamageSpecifier(_proto.Index(BruteDamageGroup), 1f);
             _damageable.TryChangeDamage(uid, damage_brute);
             return true;
         }
@@ -166,7 +166,7 @@ public sealed partial class ControlledSystem : EntitySystem
                 _mind.TransferTo(mindId, uid);
             QueueDel(component.Observer);
             RemComp<ControlledComponent>(uid);
-            var damage_brute = new DamageSpecifier(_proto.Index<DamageGroupPrototype>("Brute"), 1f);
+            var damage_brute = new DamageSpecifier(_proto.Index(BruteDamageGroup), 1f);
             _damageable.TryChangeDamage(uid, damage_brute);
             return true;
         }

@@ -1,4 +1,4 @@
-- type: markingsGroup
+﻿- type: markingsGroup
   parent: Undergarments
   id: Slime
   limits:
@@ -101,10 +101,21 @@
         type: StrippableBoundUserInterface
   - type: UseDelay
     delay: 0.5
+  # ADT-Tweak end
+  - type: LanguageSpeaker
+    languages:
+      GalacticCommon: Speak
+      Bubblish: Speak
+  - type: SizeAttributeWhitelist # Frontier
+    tall: true
+    tallscale: 1.05
+    short: true
+    shortscale: 0.95
+  # ADT-Tweak end
   - type: Speech
     speechVerb: Slime
     speechSounds: Slime
-    allowedEmotes: ['Squish']
+    allowedEmotes: ['Squish', 'Pop', 'Bubbles'] # ADT-Tweak: Добавил 'Pop', 'Bubbles'
   - type: TypingIndicator
     proto: slime
   - type: Vocal
@@ -114,6 +125,7 @@
       Unsexed: MaleSlime
   - type: Damageable
     damageModifierSet: Slime
+  - type: Injurable
   - type: PassiveDamage # Around 8 damage a minute healed
     allowedStates:
     - Alive
@@ -174,6 +186,11 @@
       types:
         Asphyxiation: -1.0
     maxSaturation: 15
+  # ADT-Tweak start
+  - type: Tag
+    tags:
+    - ADTSlimeEmotes
+  # ADT-Tweak end
 
 - type: entity
   parent: OrganBase

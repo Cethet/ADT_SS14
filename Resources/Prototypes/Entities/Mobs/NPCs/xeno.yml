@@ -1,4 +1,4 @@
-# Hacky for the stress test so don't even consider adding to this
+﻿# Hacky for the stress test so don't even consider adding to this
 - type: entity
   name: burrower
   id: MobXeno
@@ -78,19 +78,15 @@
      collection: AlienClaw
     animation: WeaponArcBite
     damage:
-<<<<<<< HEAD
     # ADT-Tweak start
       types:
         Slash: 20
         Structural: 20
   - type: Damageable
     damageModifierSet: ADTXenoDamageSet
+  - type: Injurable
   - type: Fauna
     # ADT-Tweak end
-=======
-      types:
-        Piercing: 6
->>>>>>> upstreamwiz/master
   - type: DamageStateVisuals
     states:
       Alive:
@@ -166,8 +162,10 @@
   #ADT Start: Xeno baff
   - type: MeleeWeapon
     damage:
-      groups:
-        Brute: 27
+      types:
+        Blunt: 9
+        Slash: 9
+        Piercing: 9
   # ADT End
   - type: Fixtures
     fixtures:
@@ -206,16 +204,11 @@
       40: 0.7
   - type: MeleeWeapon
     damage:
-<<<<<<< HEAD
   # ADT-Tweak start
       types:
         Blunt: 15
         Structural: 100
   # ADT-Tweak end
-=======
-      types:
-        Slash: 6
->>>>>>> upstreamwiz/master
   - type: MovementSpeedModifier
     baseSprintSpeed: 4
   - type: Fixtures
@@ -257,13 +250,8 @@
   - type: MovementSpeedModifier
   - type: MeleeWeapon
     damage:
-<<<<<<< HEAD
-     groups:
-       Brute: 42 # ADT Tweak
-=======
       types:
-        Slash: 12
->>>>>>> upstreamwiz/master
+        Slash: 42 # ADT Tweak
   - type: Fixtures
     fixtures:
       fix1:
@@ -316,16 +304,11 @@
     # ADT-tweak end
   - type: MeleeWeapon
     damage:
-<<<<<<< HEAD
     # ADT-tweak start
      types:
        Slash: 27
        Blunt: 10
     # ADT-tweak end
-=======
-      types:
-        Slash: 10
->>>>>>> upstreamwiz/master
   - type: SlowOnDamage
     speedModifierThresholds:
       50: 0.7
@@ -367,15 +350,11 @@
     baseSprintSpeed: 6.0 # ADT-Tweak
   - type: MeleeWeapon
     damage:
-<<<<<<< HEAD
-    # ADT-Tweak start
-     types:
-       Piercing: 13
-    # ADT-Tweak end
-=======
       types:
+    # ADT-Tweak start
+        Piercing: 13
+    # ADT-Tweak end
         Slash: 5
->>>>>>> upstreamwiz/master
   - type: Fixtures
     fixtures:
       fix1:

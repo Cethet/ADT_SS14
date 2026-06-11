@@ -10,6 +10,7 @@ using Robust.Shared.Audio;
 using Content.Shared.Mobs;
 using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking.Prototypes;
+using Content.Shared.Damage.Prototypes; // ADT
 
 namespace Content.Shared.GameTicking
 {
@@ -199,7 +200,8 @@ namespace Content.Shared.GameTicking
 
             public MobState EntMobState;
 
-            public Dictionary<string, FixedPoint2> DamagePerGroup;
+            [Obsolete("This is only used for the end of round summary, and is not intended to be used for anything else. It will be removed once we have a better way to track this information.")]
+            public Dictionary<ProtoId<DamageGroupPrototype>, FixedPoint2> DamagePerGroup;
             //ADT-tweak-end
         }
 

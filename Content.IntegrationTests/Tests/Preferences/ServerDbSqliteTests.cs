@@ -55,16 +55,11 @@ namespace Content.IntegrationTests.Tests.Preferences
                 Voice = "Eugene", // Corvax-TTS
                 Age = 21,
                 Appearance = new(
-<<<<<<< HEAD
-                    "Afro",
-                    new List<Color> { Color.Aqua }, // ADT-tweak
-                    "Shaved",
-                    Color.Aquamarine,
-=======
->>>>>>> upstreamwiz/master
                     Color.Azure,
+                    new List<Color> { Color.Aqua },
                     Color.Beige,
-                    new ())
+                    new()
+                )
             };
         }
 

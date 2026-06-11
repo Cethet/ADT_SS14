@@ -98,7 +98,7 @@
   id: FigurinesQM
   values:
     prefix: figurines-qm-
-    count: 8
+    count: 9
 
 - type: localizedDataset
   id: FigurinesCE
@@ -291,12 +291,9 @@
   values:
     prefix: figurines-griffin-
     count: 5
-<<<<<<< HEAD
-=======
 
 - type: localizedDataset
   id: FigurinesMechGeneric
   values:
     prefix: figurines-mech-generic-
     count: 4
->>>>>>> upstreamwiz/master

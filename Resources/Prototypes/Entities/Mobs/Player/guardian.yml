@@ -1,4 +1,4 @@
-# Does not inherit from simplemob
+﻿# Does not inherit from simplemob
 - type: entity
   abstract: true
   name: GuardianBase
@@ -73,6 +73,7 @@
           layer:
             - Opaque
     - type: Damageable
+    - type: Injurable
       damageContainer: Biological
     - type: MobState
       allowedStates:
@@ -241,18 +242,6 @@
         Hand:
           location: Left
     - type: ComplexInteraction
-<<<<<<< HEAD
-    - type: Clumsy
-      gunShootFailDamage:
-        types:
-          Blunt: 5
-          Piercing: 4
-          Heat: 3
-      catchingFailDamage:
-        types:
-          Blunt: 1
-=======
->>>>>>> upstreamwiz/master
     - type: MeleeWeapon
       angle: 30
       animation: WeaponArcFist

@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   abstract: true
   parent: BaseItem
   id: SheetOtherBase
@@ -13,11 +13,9 @@
     tags:
     - Sheet
     - ConstructionMaterial
-<<<<<<< HEAD
     - NoPaint #ADT tweak
-=======
->>>>>>> upstreamwiz/master
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
@@ -117,13 +115,10 @@
         - ReagentId: Plasma
           Quantity: 10
         canReact: false
-<<<<<<< HEAD
   - type: Tag
     tags:
     - Sheet
     - NoPaint #ADT tweak
-=======
->>>>>>> upstreamwiz/master
 
 - type: entity
   parent: SheetPlasma
@@ -157,10 +152,7 @@
     - Plastic
     - Sheet
     - ConstructionMaterial
-<<<<<<< HEAD
     - NoPaint #ADT tweak
-=======
->>>>>>> upstreamwiz/master
   - type: Material
   - type: PhysicalComposition
     materialComposition:

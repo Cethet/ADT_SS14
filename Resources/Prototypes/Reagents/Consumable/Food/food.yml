@@ -13,9 +13,11 @@
       - !type:SatiateHunger
       - !type:HealthChange # ADT-Tweak start
         damage:
-          groups:
-            Brute: -0.2
-            Burn: -0.2
+          types:
+            Heat: -0.2
+            Shock: -0.2
+            Cold: -0.2
+            Piercing: -0.2
       - !type:ModifyBleed
         amount: -0.1
       - !type:ModifyBloodLevel
@@ -38,13 +40,8 @@
   metabolisms:
     Metabolites: #This makes it not compete with medicines, a large bonus for something that can heal
       effects:
-<<<<<<< HEAD
-      - !type:HealthChange
-        # probability: 0.5 ADT-Tweak
-=======
       - !type:EvenHealthChange
-        probability: 0.5
->>>>>>> upstreamwiz/master
+        # probability: 0.5 ADT-Tweak
         damage:
           Brute: -0.5
           Burn: -0.5
@@ -71,18 +68,10 @@
   metabolisms:
     Metabolites:
       effects:
-<<<<<<< HEAD
-      - !type:HealthChange
-        # probability: 0.5 ADT-Tweak
-        damage:
-          groups:
-            Brute: -0.6 #ADT-Tweak -0.4 -> -0.6
-=======
       - !type:EvenHealthChange
-        probability: 0.5
+        #probability: 0.5 ADT-Tweak
         damage:
-          Brute: -0.4
->>>>>>> upstreamwiz/master
+          Brute: -0.6 #ADT-Tweak -0.4 -> -0.6
       - !type:ModifyBloodLevel
         amount: 2 # ADT-Tweak 1 -> 2
       - !type:SatiateHunger

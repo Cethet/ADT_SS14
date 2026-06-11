@@ -17,14 +17,15 @@ namespace Content.Client.VendingMachines.UI
     [GenerateTypedNameReferences]
     public sealed partial class VendingMachineMenu : FancyWindow
     {
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!;
 
-        /// <summary>
-        /// Whether the vending machine is able to be interacted with or not.
-        /// </summary>
-        private bool _enabled;
-        private readonly Dictionary<EntProtoId, uint> _amounts = new();
+    /// <summary>
+    /// Whether the vending machine is able to be interacted with or not.
+    /// </summary>
+    private bool _enabled;
+
+    private readonly Dictionary<EntProtoId, uint> _amounts = new();
 
         private readonly Dictionary<EntProtoId, EntityUid> _dummies = [];
         private EntityUid _entityUid;

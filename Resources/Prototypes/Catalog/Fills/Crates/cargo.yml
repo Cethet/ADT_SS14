@@ -197,23 +197,9 @@
     - id: PlushieLamp
     - id: PlushieSharkBlue
     - id: PlushieMoth
-<<<<<<< HEAD
-      prob: 0.01
-      orGroup: Plushies
-    - id: PlushieVulp
-      prob: 0.01
-      orGroup: Plushies
-    - id: PlushieArachind
-      prob: 0.01
-      orGroup: Plushies
-    - id: PlushieLizardJobMultiweh # the exceedingly rare multiweh!
-      prob: 0.01
-      orGroup: Plushies
-=======
     - id: PlushieVulp
     - id: PlushieArachind
     - id: PlushieLizardJobMultiweh # the exceedingly rare multiweh!
->>>>>>> upstreamwiz/master
     - id: PlushieThrongler #hehe
       weight: 0.05
 
@@ -262,20 +248,12 @@
     - id: BoxDonkSoftBox
       weight: 0.8
     - id: GrenadeFoamDart
-<<<<<<< HEAD
       prob: 0.001
-      orGroup: NotUseful
 # ADT-tweak start
     - id: ADTToyBlasterGunGreen
-      prob: 0.01
-      orGroup: NotUseful
-    - id: ADTToyBlasterGunRed
-      prob: 0.01
-      orGroup: NotUseful
-    - id: ADTToyBlasterGunBlue
-      prob: 0.01
-      orGroup: NotUseful
-# ADT-tweak end
-=======
       weight: 0.1
->>>>>>> upstreamwiz/master
+    - id: ADTToyBlasterGunRed
+      weight: 0.1
+    - id: ADTToyBlasterGunBlue
+      weight: 0.1
+# ADT-tweak end

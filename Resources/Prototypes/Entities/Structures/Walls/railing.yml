@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   parent: BaseStructure
   id: BaseRailing
   abstract: true
@@ -15,8 +15,9 @@
   - type: InteractionOutline
   - type: Repairable
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: FlimsyMetallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Climbable
   - type: Construction
     graph: Railing
@@ -93,11 +94,7 @@
       fix2:
         shape:
           !type:PhysShapeAabb
-<<<<<<< HEAD
           bounds: "0.5,0.5,0.45,-0.5" #ADT-tweak
-=======
-          bounds: "0.25,-0.49,0.49,0.49"
->>>>>>> upstreamwiz/master
         density: 1000
         mask:
         - TableMask
@@ -143,11 +140,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-<<<<<<< HEAD
           bounds: "-0.5,0.5,-0.45,0.45" #ADT-tweak
-=======
-          bounds: "-0.49,0.25,-0.25,0.49"
->>>>>>> upstreamwiz/master
         density: 1000
         mask:
         - TableMask

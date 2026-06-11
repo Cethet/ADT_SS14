@@ -49,6 +49,7 @@ using Content.Shared.Mindshield.Components; // ADT-Changeling-Tweak
 using Robust.Shared.Serialization.Manager;
 using Content.Shared.DetailExaminable;
 using Content.Shared.ADT.CharecterFlavor; // ADT-Changeling-Tweak
+using Content.Shared.Preferences; // ADT
 
 namespace Content.Server.Polymorph.Systems;
 
@@ -307,8 +308,8 @@ public sealed partial class PolymorphSystem : EntitySystem
 
         if (configuration.TransferTTS && TryComp<TTSComponent>(uid, out var originalTTSComp))
         {
-           var childTTSComp = EnsureComp<TTSComponent>(child);
-           childTTSComp.VoicePrototypeId = originalTTSComp.VoicePrototypeId;
+            var childTTSComp = EnsureComp<TTSComponent>(child);
+            childTTSComp.VoicePrototypeId = originalTTSComp.VoicePrototypeId;
         }
 
         if (configuration.TransferSpeechBarks && TryComp<SpeechBarksComponent>(uid, out var originalBarksComp))
@@ -354,11 +355,11 @@ public sealed partial class PolymorphSystem : EntitySystem
 
             foreach (var accentType in accentComponents)
             {
-                if (EntityManager.HasComponent(uid, accentType))
+                if (HasComp(uid, accentType))
                 {
                     var originalAccentComp = EntityManager.GetComponent(uid, accentType);
                     var childAccentComp = (Component)_serialization.CreateCopy(originalAccentComp, notNullableOverride: true);
-            EntityManager.AddComponent(child, childAccentComp);
+                    AddComp(child, childAccentComp);
                 }
             }
         }
@@ -373,13 +374,12 @@ public sealed partial class PolymorphSystem : EntitySystem
                 typeof(BlindableComponent),
                 typeof(PermanentBlindnessComponent),
                 typeof(BlurryVisionComponent),
-                typeof(TemporaryBlindnessComponent),
+                typeof(BlindnessStatusEffectComponent),
                 typeof(UncloneableComponent),
                 typeof(NarcolepsyComponent),
                 typeof(UnrevivableComponent),
                 typeof(MutedComponent),
                 typeof(ParacusiaComponent),
-                typeof(PainNumbnessComponent),
                 typeof(HemophiliaComponent),
                 typeof(DeafTraitComponent),
                 typeof(MonochromacyComponent),
@@ -387,7 +387,6 @@ public sealed partial class PolymorphSystem : EntitySystem
                 typeof(SoftWalkComponent),
                 typeof(FreerunningComponent),
                 typeof(SprinterComponent),
-                typeof(FastLockersComponent),
                 typeof(HardThrowerComponent),
                 typeof(FoodConsumptionSpeedModifierComponent),
                 typeof(DrunkenResilienceComponent)
@@ -395,11 +394,11 @@ public sealed partial class PolymorphSystem : EntitySystem
 
             foreach (var quirkType in quirkComponents)
             {
-                if (EntityManager.HasComponent(uid, quirkType))
+                if (HasComp(uid, quirkType))
                 {
                     var originalQuirkComp = EntityManager.GetComponent(uid, quirkType);
                     var childQuirkComp = (Component)_serialization.CreateCopy(originalQuirkComp, notNullableOverride: true);
-                    EntityManager.AddComponent(child, childQuirkComp);
+                    AddComp(child, childQuirkComp);
                 }
             }
         }
@@ -437,8 +436,8 @@ public sealed partial class PolymorphSystem : EntitySystem
 
         RetrievePausedEntity(uid, child);
 
-        if (TryComp<HumanoidAppearanceComponent>(child, out var humanoidAppearance))
-            _humanoid.SetAppearance(data.HumanoidAppearanceComponent, humanoidAppearance);
+        // Apply stored humanoid profile (includes appearance) to the entity being polymorphed
+        _visualBody.ApplyProfileTo(uid, data.Profile);
 
         if (TryComp<DnaComponent>(child, out var dnaComp))
         {
@@ -662,7 +661,7 @@ public sealed partial class PolymorphSystem : EntitySystem
         _metaData.SetEntityName(actionId.Value, Loc.GetString("polymorph-self-action-name", ("target", entProto.Name)), metaDataCache);
         _metaData.SetEntityDescription(actionId.Value, Loc.GetString("polymorph-self-action-description", ("target", entProto.Name)), metaDataCache);
 
-        if (_actions.GetAction(actionId) is not {} action)
+        if (_actions.GetAction(actionId) is not { } action)
             return;
 
         _actions.SetIcon((action, action.Comp), new SpriteSpecifier.EntityPrototype(polyProto.Configuration.Entity));
@@ -671,7 +670,7 @@ public sealed partial class PolymorphSystem : EntitySystem
 
     public void RemovePolymorphAction(ProtoId<PolymorphPrototype> id, Entity<PolymorphableComponent> target)
     {
-        if (target.Comp.PolymorphActions is not {} actions)
+        if (target.Comp.PolymorphActions is not { } actions)
             return;
 
         if (actions.TryGetValue(id, out var action))
@@ -689,17 +688,27 @@ public sealed partial class PolymorphSystem : EntitySystem
 
         if (!TryComp<MetaDataComponent>(source, out var targetMeta))
             return null;
+
         if (!TryPrototype(source, out var prototype, targetMeta))
             return null;
+
         if (!TryComp<DnaComponent>(source, out var dnaComp))
             return null;
-        if (!TryComp<HumanoidAppearanceComponent>(source, out var targetHumanoidAppearance))
-            return null;
 
+        if (!TryComp<HumanoidProfileComponent>(source, out var targetHumanoidAppearance))
+            return null;
 
         newHumanoidData.EntityPrototype = prototype;
         newHumanoidData.MetaDataComponent = targetMeta;
-        newHumanoidData.HumanoidAppearanceComponent = _serialization.CreateCopy(targetHumanoidAppearance, notNullableOverride: true);
+
+        var builtProfile = new HumanoidCharacterProfile()
+            .WithName(targetMeta.EntityName)
+            .WithSpecies(targetHumanoidAppearance.Species)
+            .WithSex(targetHumanoidAppearance.Sex)
+            .WithAge(targetHumanoidAppearance.Age)
+            .WithCharacterAppearance(HumanoidCharacterAppearance.DefaultWithSpecies(targetHumanoidAppearance.Species, targetHumanoidAppearance.Sex));
+
+        newHumanoidData.Profile = builtProfile;
         if (dnaComp.DNA != null)
             newHumanoidData.DNA = dnaComp.DNA;
 
@@ -710,8 +719,8 @@ public sealed partial class PolymorphSystem : EntitySystem
 
         if (TryComp(source, out MindShieldComponent? mindshieldComp)) // copy over mindshield status
         {
-            var copiedMindshieldComp = (Component) _serialization.CreateCopy(mindshieldComp, notNullableOverride: true);
-            EntityManager.AddComponent(newEntityUid, copiedMindshieldComp);
+            var copiedMindshieldComp = (Component)_serialization.CreateCopy(mindshieldComp, notNullableOverride: true);
+            AddComp(newEntityUid, copiedMindshieldComp);
         }
         //ADT-tweak-start
         // if (TryComp<DetailExaminableComponent>(source, out var desc))
@@ -745,18 +754,29 @@ public sealed partial class PolymorphSystem : EntitySystem
 
         if (!TryComp<MetaDataComponent>(source, out var targetMeta))
             return null;
+
         if (!TryPrototype(source, out var prototype, targetMeta))
             return null;
+
         if (!TryComp<DnaComponent>(source, out var dnaComp))
             return null;
-        if (!TryComp<HumanoidAppearanceComponent>(source, out var targetHumanoidAppearance))
+
+        if (!TryComp<HumanoidProfileComponent>(source, out var targetHumanoidAppearance))
             return null;
 
         newHumanoidData.EntityPrototype = prototype;
         newHumanoidData.MetaDataComponent = targetMeta;
-        newHumanoidData.HumanoidAppearanceComponent = _serialization.CreateCopy(targetHumanoidAppearance, notNullableOverride: true);
+
+        newHumanoidData.Profile = new HumanoidCharacterProfile()
+            .WithName(targetMeta.EntityName)
+            .WithSpecies(targetHumanoidAppearance.Species)
+            .WithSex(targetHumanoidAppearance.Sex)
+            .WithAge(targetHumanoidAppearance.Age)
+            .WithCharacterAppearance(HumanoidCharacterAppearance.DefaultWithSpecies(targetHumanoidAppearance.Species, targetHumanoidAppearance.Sex));
+
         if (dnaComp.DNA != null)
             newHumanoidData.DNA = dnaComp.DNA;
+
         newHumanoidData.EntityUid = uid;
 
         return newHumanoidData;
@@ -770,7 +790,7 @@ public sealed partial class PolymorphSystem : EntitySystem
 
         newHumanoidData.EntityPrototype = data.EntityPrototype;
         newHumanoidData.MetaDataComponent = data.MetaDataComponent;
-        newHumanoidData.HumanoidAppearanceComponent = _serialization.CreateCopy(data.HumanoidAppearanceComponent, notNullableOverride: true);;
+        newHumanoidData.Profile = new HumanoidCharacterProfile(data.Profile);
         newHumanoidData.DNA = data.DNA;
         newHumanoidData.EntityUid = ent;
         _metaData.SetEntityName(ent, data.MetaDataComponent.EntityName);

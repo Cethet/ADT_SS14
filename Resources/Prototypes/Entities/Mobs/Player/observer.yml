@@ -42,37 +42,6 @@
   - type: Sprite
     sprite: Mobs/Ghosts/ghost_human.rsi
     color: "#fff8"
-<<<<<<< HEAD
-    layers: # ADT ghost start
-    # - state: animated
-    - map: [ "enum.HumanoidVisualLayers.Chest" ]
-      shader: unshaded
-    - map: [ "enum.HumanoidVisualLayers.Head" ]
-      shader: unshaded
-    - map: [ "enum.HumanoidVisualLayers.Snout" ]
-      shader: unshaded
-    - map: [ "enum.HumanoidVisualLayers.Eyes" ]
-      shader: unshaded
-    - map: [ "enum.HumanoidVisualLayers.RArm" ]
-      shader: unshaded
-    - map: [ "enum.HumanoidVisualLayers.LArm" ]
-      shader: unshaded
-    - map: [ "enum.HumanoidVisualLayers.RLeg" ]
-      shader: unshaded
-    - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-      shader: unshaded
-    - map: [ "enum.HumanoidVisualLayers.LFoot" ]
-      shader: unshaded
-    - map: [ "enum.HumanoidVisualLayers.RFoot" ]
-      shader: unshaded
-    - map: ["enum.HumanoidVisualLayers.LHand"]
-      shader: unshaded
-    - map: ["enum.HumanoidVisualLayers.RHand"]
-      shader: unshaded
-    - map: ["jumpsuit"]
-      shader: unshaded
-  # ADT ghost end
-=======
     layers:
     - state: animated
       map: [ "ghostVariant" ]
@@ -101,7 +70,6 @@
           ghost_Explosion0: { state: ghost_Explosion0 }
           ghost_Explosion1: { state: ghost_Explosion1 }
           ghost_Explosion2: { state: ghost_Explosion2 }
->>>>>>> upstreamwiz/master
   - type: ContentEye
     maxZoom: 1.44,1.44
   - type: Eye
@@ -111,33 +79,6 @@
   - type: Examiner
     skipChecks: true
   - type: Ghost
-<<<<<<< HEAD
-  # ADT-Tweak-Start
-    availableClothing:
-    - ClothingUniformJumpsuitPsychologist
-    - ClothingUniformJumpsuitScientist
-    - ClothingUniformJumpsuitSafari
-    - ClothingUniformJumpsuitSecGrey
-    - ClothingUniformJumpsuitBartender
-    - ClothingUniformJumpsuitBartenderPurple
-    - ClothingUniformJumpsuitChef
-    - ClothingUniformJumpsuitChemistry
-    - ClothingUniformJumpsuitDetective
-    - ClothingUniformJumpsuitHawaiYellow
-    - ClothingUniformJumpsuitHoS
-    - ClothingUniformJumpsuitJanitor
-    - ClothingUniformJumpsuitKimono
-    - ClothingUniformJumpsuitMime
-    - ClothingUniformJumpsuitChaplain
-    - ClothingUniformJumpsuitParamedic
-    - ClothingUniformJumpsuitPirate
-    - ADTClothingUniformJumpsuitBlueshield
-    - ADTClothingUniformJumpsuitGreenSuitLawyer
-    - ADTClothingUniformJumpsuitBarber
-    - ADTClothingUniformCorrectionsOfficer
-    - ADTClothingUniformSquidGamePlayer
-  # ADT-Tweak-End
-=======
   - type: GhostSpriteState
     damageMap:
       Blunt: 3
@@ -151,7 +92,6 @@
       Poison: 1
       Asphyxiation: 1
     prefix: "ghost_"
->>>>>>> upstreamwiz/master
   - type: GhostHearing
   - type: ShowElectrocutionHUD
   - type: IntrinsicRadioReceiver
@@ -170,12 +110,6 @@
   - type: LanguageSpeaker
     languages:
       Universal: Understand
-  - type: Inventory
-    templateId: ghost
-  - type: InventorySlots
-  - type: HumanoidAppearance
-    species: GhostSpecies
-    shader: unshaded
   - type: TypingIndicator
     proto: ghost
   - type: Speech
@@ -196,7 +130,6 @@
     tags: # BAD: Intentional removal of inherited tag
     - AllowGhostShownByEvent
   - type: GhostInfo # ADT-Tweak
-
 
 - type: entity
   parent: BaseMentalAction

@@ -98,17 +98,16 @@
       - id: ClothingNeckCloakHerald
       - id: ClothingHeadHelmetTemplar
       # Cloaks
-      - !type:GroupSelector
-        children:
-        - id: ClothingNeckCloakTrans
-        - id: ClothingNeckCloakAdmin
-        - id: ClothingNeckCloakMoth
-        - id: ClothingNeckCloakVoid
-        - id: ClothingNeckCloakGoliathCloak
-        - id: ClothingNeckCloakAce
-        - id: ClothingNeckCloakAro
-<<<<<<< HEAD
-        # start-adt-tweak
+      # start-adt-tweak
+      #- !type:GroupSelector
+      #  children:
+        # - id: ClothingNeckCloakTrans
+        # - id: ClothingNeckCloakAdmin
+        # - id: ClothingNeckCloakMoth
+        # - id: ClothingNeckCloakVoid
+        # - id: ClothingNeckCloakGoliathCloak
+        # - id: ClothingNeckCloakAce
+        # - id: ClothingNeckCloakAro
         # - id: ClothingNeckCloakAroace
         # - id: ClothingNeckCloakBi
         # - id: ClothingNeckCloakIntersex
@@ -118,31 +117,13 @@
         # - id: ClothingNeckCloakPan
         # end-adt-tweak
       - id: ToyFigurineSkeleton
-      - id: Basketball
-      - id: Football
-      - id: TennisBall
-      - id: BalloonNT
-      - id: BalloonCorgi
       - id: MysteryFigureBox
-      - id: RubberChicken
       #ADT tweak start
       - id: SprayPaintBlue
       - id: SprayPaintRed
       - id: SprayPaintGreen
       - id: SprayPaintOrange
       - id: DeathPaint
-      #ADT tweak end
-=======
-        - id: ClothingNeckCloakAroace
-        - id: ClothingNeckCloakBi
-        - id: ClothingNeckCloakIntersex
-        - id: ClothingNeckCloakLesbian
-        - id: ClothingNeckCloakGay
-        - id: ClothingNeckCloakEnby
-        - id: ClothingNeckCloakPan
-      - id: ToyFigurineSkeleton
-      - id: MysteryFigureBox
->>>>>>> upstreamwiz/master
       # Cult
       - !type:AllSelector
         children:
@@ -164,9 +145,9 @@
       - id: ClothingShoesBootsCowboyFancy
       - id: ClothingHeadHatCowboyBountyHunter
       # Pins
+        # start adt tweak
       - !type:GroupSelector
         children:
-        # start adt tweak
         # - id: ClothingNeckLGBTPin
         # - id: ClothingNeckAromanticPin
         # - id: ClothingNeckAsexualPin
