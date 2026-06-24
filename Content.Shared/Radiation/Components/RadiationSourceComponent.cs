@@ -1,4 +1,4 @@
-using Robust.Shared.Physics;
+using Content.Shared.Radiation.Systems;
 
 namespace Content.Shared.Radiation.Components;
 
@@ -6,6 +6,7 @@ namespace Content.Shared.Radiation.Components;
 ///     Irradiate all objects in range.
 /// </summary>
 [RegisterComponent]
+[Access(typeof(SharedRadiationSystem))]
 public sealed partial class RadiationSourceComponent : Component
 {
     /// <summary>
@@ -46,6 +47,4 @@ public sealed partial class RadiationSourceComponent : Component
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public bool Enabled = true;
 
-    [ViewVariables]
-    public DynamicTree.Proxy Proxy = DynamicTree.Proxy.Free;
 }

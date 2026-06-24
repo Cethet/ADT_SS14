@@ -120,6 +120,9 @@
   id: Mask
 
 - type: Tag
+  id: MesonVisible
+
+- type: Tag
   id: Organ
 
 - type: Tag
@@ -668,8 +671,8 @@
 - type: Tag
   id: ADTFullRiotShieldSyndi
 
-- type: Tag
-  id: ADTMegaCell
+#- type: Tag
+#  id: ADTMegaCell
 
 - type: Tag
   id: ADTSheet
@@ -763,3 +766,6 @@
 
 - type: Tag
   id: ADTSvet217KnifeKS43Cherry
+
+- type: Tag
+  id: ADTEnergyShield
